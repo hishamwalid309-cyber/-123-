@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الاقتصاد الجزئي (1) — ملخص تفاعلي</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&family=Cairo:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#111827; --muted:#5b6472; --line:#e6e8ef;
+  --c1a:#6366f1; --c1b:#a855f7;
+  --c2a:#0284c7; --c2b:#14b8a6;
+  --c3a:#f59e0b; --c3b:#ef4444;
+  --bg:#f6f7fb;
+  --r:18px;
+  --shadow:0 10px 30px rgba(23,30,55,.08);
+  --shadow2:0 18px 50px rgba(23,30,55,.14);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:'Tajawal',system-ui,'Segoe UI',Tahoma,sans-serif;
+  line-height:1.9; font-size:17px;
+  -webkit-font-smoothing:antialiased;
+}
+body::before{
+  content:""; position:fixed; inset:0; z-index:-1;
+  background:
+    radial-gradient(600px 400px at 90% -5%, rgba(168,85,247,.16), transparent 60%),
+    radial-gradient(700px 500px at 5% 5%, rgba(20,184,166,.14), transparent 60%),
+    radial-gradient(800px 600px at 50% 100%, rgba(245,158,11,.10), transparent 60%);
+}
+h1,h2,h3,h4,.brand,.tab{font-family:'Cairo','Tajawal',sans-serif; line-height:1.5}
+p{margin:.5em 0}
+a{color:inherit}
+.wrap{max-width:1100px;margin:0 auto;padding:0 18px}
+
+/* ---------- header ---------- */
+#bar{position:fixed;top:0;right:0;height:4px;width:0%;z-index:99;
+  background:linear-gradient(90deg,var(--c1a),var(--c1b),var(--c2a),var(--c2b),var(--c3a));}
+header.top{position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);
+  background:rgba(255,255,255,.82);border-bottom:1px solid var(--line);}
+.top .wrap{display:flex;align-items:center;gap:14px;height:64px}
+.brand{display:flex;align-items:center;gap:9px;font-weight:800;font-size:17px;white-space:nowrap}
+.dot{width:30px;height:30px;border-radius:10px;display:grid;place-items:center;color:#fff;font-size:15px;
+  background:linear-gradient(135deg,var(--c1a),var(--c1b));box-shadow:0 6px 16px rgba(124,58,237,.35)}
+nav.tabs{display:flex;gap:6px;overflow-x:auto;margin-inline-start:auto;scrollbar-width:none}
+nav.tabs::-webkit-scrollbar{display:none}
+.tab{font-size:13.5px;font-weight:700;padding:8px 14px;border-radius:999px;text-decoration:none;
+  color:#495064;border:1px solid transparent;white-space:nowrap;transition:.2s}
+.tab:hover{background:#eef0f7}
+.tab.c1:hover{color:#5b21b6;background:#f3e8ff}
+.tab.c2:hover{color:#0369a1;background:#e0f2fe}
+.tab.c3:hover{color:#b45309;background:#fef3c7}
+.tab.ex:hover{color:#0f766e;background:#ccfbf1}
+
+/* ---------- hero ---------- */
+.hero{padding:56px 0 26px;text-align:center;position:relative}
+.kicker{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:700;letter-spacing:.2px;
+  background:#fff;border:1px solid var(--line);padding:7px 15px;border-radius:999px;color:#4b5563;box-shadow:var(--shadow)}
+.kicker i{width:8px;height:8px;border-radius:50%;background:#22c55e;display:block;box-shadow:0 0 0 4px rgba(34,197,94,.18)}
+.hero h1{font-size:clamp(30px,5vw,50px);margin:16px 0 8px;letter-spacing:-.5px}
+.grad{background:linear-gradient(100deg,var(--c1a),var(--c1b) 45%,var(--c2a));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p.sub{color:var(--muted);font-size:17px;max-width:640px;margin:0 auto}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:26px auto 0;max-width:760px}
+.stat{background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px 10px;box-shadow:var(--shadow)}
+.stat b{display:block;font-family:'Cairo';font-size:23px;line-height:1.2;background:linear-gradient(135deg,var(--c1a),var(--c2a));-webkit-background-clip:text;background-clip:text;color:transparent}
+.stat span{font-size:12.5px;color:var(--muted)}
+
+/* ---------- sections ---------- */
+section{padding:34px 0;scroll-margin-top:80px}
+.sec-head{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+.num{flex:0 0 auto;width:52px;height:52px;border-radius:16px;display:grid;place-items:center;
+  font-family:'Cairo';font-weight:800;font-size:20px;color:#fff;box-shadow:var(--shadow2)}
+.sec-head h2{font-size:clamp(21px,3vw,29px);margin:0}
+.sec-head p{margin:2px 0 0;color:var(--muted);font-size:14px}
+.chip{display:inline-block;font-size:12px;font-weight:700;padding:4px 11px;border-radius:999px;margin-inline-start:6px}
+.c1 .num,.c1num{background:linear-gradient(135deg,var(--c1a),var(--c1b))}
+.c2 .num,.c2num{background:linear-gradient(135deg,var(--c2a),var(--c2b))}
+.c3 .num,.c3num{background:linear-gradient(135deg,var(--c3a),var(--c3b))}
+.c1 .chip{background:#f3e8ff;color:#6b21a8}
+.c2 .chip{background:#e0f2fe;color:#075985}
+.c3 .chip{background:#fef3c7;color:#92400e}
+
+.card{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:20px 22px;box-shadow:var(--shadow);margin:14px 0}
+.card h3{margin:0 0 10px;font-size:19px}
+.card h4{margin:16px 0 6px;font-size:16.5px}
+.card h3 .n{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:8px;font-size:13px;color:#fff;margin-inline-end:8px;vertical-align:2px}
+.c1 .n{background:linear-gradient(135deg,var(--c1a),var(--c1b))}
+.c2 .n{background:linear-gradient(135deg,var(--c2a),var(--c2b))}
+.c3 .n{background:linear-gradient(135deg,var(--c3a),var(--c3b))}
+.grid{display:grid;gap:12px}
+.g2{grid-template-columns:repeat(2,1fr)}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+@media(max-width:820px){.g2,.g3,.g4{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}}
+
+.mini{background:#fbfbfe;border:1px solid var(--line);border-radius:14px;padding:14px 16px;transition:.22s}
+.mini:hover{transform:translateY(-2px);box-shadow:var(--shadow);border-color:#dcd9f5}
+.mini b.t{display:block;font-family:'Cairo';font-size:15.5px;margin-bottom:4px}
+.mini p{margin:0;font-size:14.5px;color:#3f4756}
+.c1 .mini{border-inline-start:4px solid #a855f7}
+.c2 .mini{border-inline-start:4px solid #0ea5e9}
+.c3 .mini{border-inline-start:4px solid #f59e0b}
+
+.def{background:linear-gradient(135deg,#faf7ff,#f5f3ff);border:1px solid #e9e2ff;border-radius:14px;padding:12px 16px;margin:8px 0;font-size:15.5px}
+.def b{color:#5b21b6}
+.c2 .def{background:linear-gradient(135deg,#f0f9ff,#ecfeff);border-color:#cffafe}
+.c2 .def b{color:#0369a1}
+.c3 .def{background:linear-gradient(135deg,#fffbeb,#fef2f2);border-color:#fde68a}
+.c3 .def b{color:#b45309}
+
+.note{border-radius:14px;padding:13px 16px;margin:12px 0;font-size:15px;display:flex;gap:10px;align-items:flex-start}
+.note .ic{flex:0 0 auto;font-weight:800;font-size:16px;line-height:1.6}
+.tip{background:#ecfdf5;border:1px solid #bbf7d0;color:#065f46}
+.warn{background:#fff7ed;border:1px solid #fed7aa;color:#9a3412}
+.ex{background:#eef2ff;border:1px solid #c7d2fe;color:#3730a3}
+.ex b{color:#1e1b4b}
+
+table.tb{width:100%;border-collapse:separate;border-spacing:0;margin:12px 0;font-size:14.5px;background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+table.tb th{background:linear-gradient(135deg,#1f2937,#374151);color:#fff;font-weight:700;padding:10px 8px;font-size:13.5px;text-align:center}
+.c1 table.tb th{background:linear-gradient(135deg,#4c1d95,#7c3aed)}
+.c2 table.tb th{background:linear-gradient(135deg,#0c4a6e,#0284c7)}
+.c3 table.tb th{background:linear-gradient(135deg,#92400e,#f59e0b)}
+table.tb td{padding:9px 8px;text-align:center;border-top:1px solid #eef0f6}
+table.tb tbody tr:nth-child(even){background:#fafbff}
+table.tb td.r{text-align:right}
+table.tb tr.mark td{background:#fef9c3;font-weight:700}
+
+.chart{width:100%;max-width:470px;display:block;margin:10px auto;background:#fff;border-radius:16px;border:1px solid var(--line);padding:6px}
+.ax{stroke:#94a3b8;stroke-width:1.6}
+.gridl{stroke:#eef1f6;stroke-width:1}
+.lb{font-family:'Tajawal';font-size:12.5px;fill:#475569;font-weight:700}
+.lb.sm{font-size:11px;fill:#64748b}
+.curve{fill:none;stroke-width:3;stroke-linecap:round}
+.curve.d{stroke:#0284c7}
+.curve.s{stroke:#f59e0b}
+.curve.p{stroke:#7c3aed}
+.curve.dash{stroke-dasharray:6 6;stroke-width:2.4;opacity:.75}
+.pt{fill:#0f172a}
+.pt.d{fill:#0284c7}
+.pt.s{fill:#f59e0b}
+.pt.p{fill:#7c3aed}
+.zone{fill:rgba(124,58,237,.07)}
+
+details.ans{background:#f8fafc;border:1px dashed #cbd5e1;border-radius:14px;padding:2px 16px;margin:10px 0}
+details.ans[open]{background:#f0fdf4;border-color:#86efac;border-style:solid}
+details.ans summary{cursor:pointer;font-weight:800;color:#0f766e;padding:10px 0;font-size:14.5px;list-style:none;display:flex;align-items:center;gap:8px}
+details.ans summary::-webkit-details-marker{display:none}
+details.ans summary::before{content:"▸";font-size:13px;transition:.2s}
+details.ans[open] summary::before{transform:rotate(90deg)}
+details.ans .body{padding-bottom:14px;font-size:15px}
+
+.qbox{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px 20px;box-shadow:var(--shadow);margin:14px 0}
+.qbox .qn{display:inline-block;font-size:12px;font-weight:800;padding:3px 10px;border-radius:8px;margin-bottom:8px}
+.c1 .qn{background:#f3e8ff;color:#6b21a8}
+.c2 .qn{background:#e0f2fe;color:#075985}
+.qbox h4{margin:4px 0 8px;font-size:16.5px}
+
+/* quiz */
+#quiz{background:linear-gradient(160deg,#111827,#1f2937 60%,#312e81);border-radius:24px;padding:26px;color:#fff;box-shadow:var(--shadow2)}
+#quiz h3{color:#fff;margin:0 0 4px;font-size:21px}
+#quiz .qmeta{color:#c7d2fe;font-size:13px;margin-bottom:14px}
+.qitem{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:14px 16px;margin:10px 0}
+.qitem p.q{font-weight:700;margin:0 0 10px;font-size:15.5px}
+.opt{display:block;width:100%;text-align:right;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.16);
+  color:#e5e7eb;border-radius:10px;padding:9px 13px;margin:6px 0;font-family:'Tajawal';font-size:14.5px;cursor:pointer;transition:.18s}
+.opt:hover{background:rgba(255,255,255,.14)}
+.opt.ok{background:#065f46;border-color:#34d399;color:#ecfdf5}
+.opt.no{background:#7f1d1d;border-color:#f87171;color:#fee2e2}
+.qscore{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:14px;font-size:14px;color:#e0e7ff}
+.qscore b{font-size:19px;color:#fff}
+.btn{background:linear-gradient(135deg,#a855f7,#6366f1);border:0;color:#fff;font-family:'Cairo';font-weight:700;
+  padding:10px 20px;border-radius:12px;cursor:pointer;font-size:14px;box-shadow:0 8px 20px rgba(99,102,241,.4)}
+.btn:hover{filter:brightness(1.08)}
+
+footer{padding:34px 0 50px;text-align:center;color:#7c8595;font-size:13.5px}
+.up{position:fixed;bottom:20px;left:20px;width:44px;height:44px;border-radius:14px;background:#111827;color:#fff;
+  display:grid;place-items:center;text-decoration:none;box-shadow:var(--shadow2);z-index:60;font-size:18px}
+.reveal{opacity:0;transform:translateY(14px)}
+.reveal.in{opacity:1;transform:none;transition:.6s cubic-bezier(.2,.7,.3,1)}
+
+/* ---------- multi-page ---------- */
+.page{display:none}
+.page.active{display:block;animation:fadeUp .38s cubic-bezier(.2,.7,.3,1)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+nav.tabs .tab.active{background:#111827;color:#fff!important}
+.hico{font-size:19px;margin-inline-end:7px;vertical-align:-2px}
+.home-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:14px;margin-top:22px}
+.pcard{display:block;text-decoration:none;background:#fff;border:1px solid var(--line);border-radius:20px;padding:20px 18px;
+  box-shadow:var(--shadow);transition:.22s;position:relative;overflow:hidden}
+.pcard:hover{transform:translateY(-4px);box-shadow:var(--shadow2)}
+.pcard .ico{width:52px;height:52px;border-radius:15px;display:grid;place-items:center;font-size:25px;margin-bottom:10px;color:#fff}
+.pcard b{display:block;font-family:'Cairo';font-size:17px;margin-bottom:3px}
+.pcard span{font-size:13.5px;color:var(--muted);line-height:1.7;display:block}
+.pcard .go{position:absolute;top:16px;left:16px;font-size:13px;color:#9ca3af}
+.pcard::after{content:"";position:absolute;inset:auto -30px -40px auto;width:120px;height:120px;border-radius:50%;background:currentColor;opacity:.05}
+.p1{color:#7c3aed}.p2{color:#0284c7}.p3{color:#f59e0b}.p4{color:#0f766e}.p5{color:#4338ca}
+.pcard .ico.i1{background:linear-gradient(135deg,#6366f1,#a855f7)}
+.pcard .ico.i2{background:linear-gradient(135deg,#0284c7,#14b8a6)}
+.pcard .ico.i3{background:linear-gradient(135deg,#f59e0b,#ef4444)}
+.pcard .ico.i4{background:linear-gradient(135deg,#0f766e,#22c55e)}
+.pcard .ico.i5{background:linear-gradient(135deg,#4338ca,#111827)}
+.pager{display:flex;justify-content:space-between;gap:10px;margin:30px 0 6px;border-top:1px dashed #dfe3ec;padding-top:16px}
+.pager a{display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-size:14px;font-weight:700;
+  background:#fff;border:1px solid var(--line);padding:10px 16px;border-radius:12px;box-shadow:var(--shadow);color:#374151}
+.pager a:hover{border-color:#c7d2fe;color:#4338ca}
+.pager .ph{visibility:hidden}
+@media(max-width:820px){.home-grid{grid-template-columns:repeat(2,1fr)}.pcard{padding:16px 13px}.pcard .ico{width:44px;height:44px;font-size:21px}}
+</style>
+</head>
+<body>
+<div id="bar"></div>
+<header class="top">
+  <div class="wrap">
+    <div class="brand"><span class="dot">◆</span> اقتصاد جزئي (1)</div>
+    <nav class="tabs">
+      <a class="tab active" href="#home">🏠 الرئيسية</a>
+      <a class="tab c1" href="#ch1">📘 الفصل الأول</a>
+      <a class="tab c2" href="#ch2">📈 الفصل الثاني</a>
+      <a class="tab c3" href="#ch3">📦 الفصل الثالث</a>
+      <a class="tab ex" href="#exercises">✍️ السكاشن</a>
+      <a class="tab" href="#quizSec">🧠 اختبر نفسك</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+<section id="home" class="page active">
+  <div class="hero">
+    <span class="kicker"><i></i> ملخص شامل + أمثلة + تدريبات محلولة</span>
+    <h1>النظرية الاقتصادية <span class="grad">من الصفر</span></h1>
+    <p class="sub">الفصول الثلاثة الأولى: المفاهيم الأساسية، تحليلات الطلب، تحليلات العرض — بأسلوب مبسّط ورسومات وأمثلة رقمية تحفظ منها بسرعة.</p>
+    <div class="stats">
+      <div class="stat"><b>3</b><span>فصول كاملة</span></div>
+      <div class="stat"><b>2</b><span>سكشن محلول</span></div>
+      <div class="stat"><b>12</b><span>مصطلح أساسي</span></div>
+      <div class="stat"><b>10</b><span>سؤال تفاعلي</span></div>
+    </div>
+  </div>
+
+  <p style="text-align:center;margin:30px 0 4px;font-weight:800;font-family:'Cairo';font-size:18px">اختار الصفحة اللي عايز تذاكرها 👇</p>
+  <p style="text-align:center;color:#6b7280;font-size:13.5px;margin-top:0">كل فصل في صفحة مستقلة، وفي آخر كل صفحة أزرار للانتقال</p>
+
+  <div class="home-grid">
+    <a class="pcard p1" href="#ch1">
+      <span class="go">↗</span>
+      <span class="ico i1">📘</span>
+      <b>الفصل الأول</b>
+      <span>المفاهيم الأساسية • عناصر الإنتاج • المشكلة الاقتصادية • منحنى إمكانيات الإنتاج</span>
+    </a>
+    <a class="pcard p2" href="#ch2">
+      <span class="go">↗</span>
+      <span class="ico i2">📈</span>
+      <b>الفصل الثاني</b>
+      <span>الطلب • القانون • الجدول والمنحنى • المحددات • أثر الدخل والإحلال</span>
+    </a>
+    <a class="pcard p3" href="#ch3">
+      <span class="go">↗</span>
+      <span class="ico i3">📦</span>
+      <b>الفصل الثالث</b>
+      <span>العرض • القانون • الأنواع • المحددات • التغير في العرض</span>
+    </a>
+    <a class="pcard p4" href="#exercises">
+      <span class="go">↗</span>
+      <span class="ico i4">✍️</span>
+      <b>السكاشن بالحل</b>
+      <span>سكشن 1: منحنى إمكانيات الإنتاج • سكشن 2: الطلب — حل كامل ومفصّل</span>
+    </a>
+    <a class="pcard p5" href="#quizSec">
+      <span class="go">↗</span>
+      <span class="ico i5">🧠</span>
+      <b>اختبر نفسك</b>
+      <span>10 أسئلة تفاعلية بتصحيح فوري وشرح + خلاصة المراجعة</span>
+    </a>
+  </div>
+
+  <div class="tip note" style="margin-top:20px"><span class="ic">⚡</span><div><b>خطة مذاكرة سريعة:</b> اقرأ الفصل ← راجع «حيلة الحفظ» ← حل السكشن ← اختبر نفسك. ثلاث دورات وانت جاهز.</div></div>
+</section>
+
+  <!-- ============ CHAPTER 1 ============ -->
+  <section id="ch1" class="c1 page">
+    <div class="sec-head">
+      <div class="num">1</div>
+      <div>
+        <h2>مفاهيم أساسية حول النظرية الاقتصادية</h2>
+        <p>تعريف العلم — عناصر الإنتاج — المصطلحات — المشكلة الاقتصادية — منحنى إمكانيات الإنتاج</p>
+      </div>
+    </div>
+
+    <div class="card reveal">
+      <h3><span class="n">1</span> تعريفات علم الاقتصاد</h3>
+      <p style="margin-top:0;color:#4b5563">تعدّدت التعريفات عبر الزمن، وكل تعريف يبرز زاوية مختلفة — احفظها بالكلمة المفتاحية:</p>
+      <div class="grid g2">
+        <div class="mini"><b class="t">① علم الندرة</b><p>«العلم الذي يبحث في الموارد الاقتصادية المحدودة والنادرة نسبياً».</p></div>
+        <div class="mini"><b class="t">② علم الثروة</b><p>«العلم الذي يهتم بدراسة الوسائل التي تزيد من ثروة الأمم».</p></div>
+        <div class="mini"><b class="t">③ علم الدخل وتوزيعه</b><p>«دراسة سلوك الفرد في أعماله التجارية اليومية، وحصوله على الدخل وطرق استخدامه».</p></div>
+        <div class="mini"><b class="t">④ علم الرفاهية الاقتصادية</b><p>«العلم الذي يدرس ويوضح كيفية توزيع الأفراد على أفضل إشباع ممكن يزيد من مجموع منفعتهم».</p></div>
+        <div class="mini" style="grid-column:1/-1"><b class="t">⑤ علم الاختيار / دراسة المشكلة الاقتصادية</b><p>«العلم الذي يعني بدراسة سلوك الأفراد في ضوء قرارات عديدة من خلال الموارد المحدودة النادرة».</p></div>
+      </div>
+      <div class="def"><b>التعريف الجامع (احفظه):</b> أحد العلوم الاجتماعية الذي يدرس المشكلة الاقتصادية الناتجة عن محدودية الموارد وتعدد الحاجات اللانهائية، وأهم ما يظهر فيه هو <b>علم الاختيار</b> — أي كيفية تخصيص الموارد المحدودة على الحاجات المتعددة بأسلوب يحقق أقصى إشباع ممكن للفرد.</div>
+      <div class="tip note"><span class="ic">💡</span><div><b>حيلة الحفظ:</b> كل تعريف = كلمة واحدة: <b>ندرة → ثروة → دخل → رفاهية → اختيار</b>. رتّبها: «نَدَرَ الثريُّ دخلَه فرَفَهَ واختار».</div></div>
+    </div>
+
+    <div class="card reveal">
+      <h3><span class="n">2</span> عناصر الإنتاج الأربعة وعوائدها</h3>
+      <div class="grid g4">
+        <div class="mini"><b class="t">العمل</b><p>كل مجهود ذهني أو عضلي يُبذل في العملية الإنتاجية.</p><p style="margin-top:6px;color:#6b21a8;font-weight:700">العائد: الأجر</p></div>
+        <div class="mini"><b class="t">رأس المال</b><p>كل ما يمتلكه المنتج من آلات ومعدات تُستخدم في الإنتاج، وكل ما يُنتج ويُستخدم في إنتاج سلع أخرى.</p><p style="margin-top:6px;color:#6b21a8;font-weight:700">العائد: الفائدة</p></div>
+        <div class="mini"><b class="t">الأرض</b><p>من صنع الخالق من الموارد الطبيعية (أرض، مياه…).</p><p style="margin-top:6px;color:#6b21a8;font-weight:700">العائد: الريع</p></div>
+        <div class="mini"><b class="t">التنظيم</b><p>العنصر الذي يمزج العناصر ويولّف بينها، ويأخذ المخاطر ويحدد نوع السلعة وكميتها وسعر البيع.</p><p style="margin-top:6px;color:#6b21a8;font-weight:700">العائد: الربح</p></div>
+      </div>
+      <div class="tip note"><span class="ic">🧠</span><div>ديما في الامتحان بيسأل: «عنصر الإنتاج الذي يتحمل المخاطر ويأخذ الربح» = <b>التنظيم</b>.</div></div>
+    </div>
+
+    <div class="card reveal">
+      <h3><span class="n">3</span> أنواع السلع</h3>
+      <div class="grid g2">
+        <div class="mini"><b class="t">سلع استهلاكية</b><p>تُشبع حاجة مباشرة: إما <b>فورية</b> (المواد الغذائية) أو بعد فترة (السيارة) وتسمى <b>سلع استهلاكية معمرة</b>.</p></div>
+        <div class="mini"><b class="t">سلع إنتاجية (رأسمالية)</b><p>لا تُشبع حاجة المستهلك مباشرة، بل تُستخدم لإنتاج سلع أخرى (آلات، معدات) — وهي غالباً <b>غير كافية</b> لإشباع رغبات المجتمع.</p></div>
+      </div>
+    </div>
+
+    <div class="card reveal">
+      <h3><span class="n">4</span> المصطلحات الأساسية (أكتر جزء بييجي فيه أسئلة)</h3>
+      <div class="def"><b>الحاجة:</b> رغبة مُلحّة لدى الفرد للحصول على سلعة أو خدمة — وهي <b>متعددة، متزايدة، متكررة، متجددة، ولانهائية</b>.</div>
+      <div class="def"><b>الإشباع:</b> الشعور الذي ينتاب الإنسان عند إشباع حاجة معينة.</div>
+      <div class="def"><b>الندرة:</b> عدم كفاية الموارد لإشباع كل الحاجات — وهي <b>نسبية</b> (بالنسبة للطلب المطلوب منها).</div>
+      <div class="def"><b>المنفعة:</b> قدرة السلعة أو الخدمة على إشباع حاجات من حاجات الإنسان.</div>
+      <div class="def"><b>الاستثمار:</b> كل إضافة جديدة إلى رأس المال.</div>
+      <div class="def"><b>رأس المال:</b> رصيد قائم من السلع الإنتاجية.</div>
+      <div class="def"><b>الادخار:</b> الجزء الذي لم يتم الإنفاق على استهلاكه من دخل الفرد.</div>
+      <div class="warn note"><span class="ic">⚠</span><div><b>فرق مهم:</b> الاستثمار = <b>إضافة جديدة</b> لرأس المال. أما رأس المال = <b>الرصيد القائم</b> من السلع الإنتاجية. (سؤال متكرر: هل كل رأس مال استثمار؟ لا.)</div></div>
+    </div>
+
+    <div class="card reveal">
+      <h3><span class="n">5</span> المشكلة الاقتصادية وأبعادها</h3>
+      <p><b>المفهوم:</b> الموارد محدودة والحاجات متعددة، فتصبح المسألة: <b>كيف نوزّع الموارد على الحاجات للحصول على أقصى إشباع ممكن؟</b> وهي تواجه الفرد كما تواجه المجتمع.</p>
+      <div class="grid g3" style="margin-top:12px">
+        <div class="mini"><b class="t">ماذا ننتج؟</b><p>اختيار <b>نوع</b> و<b>كمية</b> السلع والخدمات التي سوف تنتج من بين البدائل المتاحة.</p></div>
+        <div class="mini"><b class="t">كيف ننتج؟</b><p>اختيار <b>الأسلوب/التكنولوجيا</b> التي يتم بها الإنتاج، ويعتمد على مدى توافر عناصر الإنتاج.</p></div>
+        <div class="mini"><b class="t">لمن ننتج؟</b><p>كيفية <b>توزيع</b> السلع والخدمات على من شاركوا في الإنتاج ومن يتم التوزيع عليه — وفق العرض والطلب أو بتدخل الدولة.</p></div>
+      </div>
+      <div class="ex note"><span class="ic">✎</span><div><b>مثال:</b> مزرعة قررت إنتاج قمح بدل قصب السكر ← «ماذا ننتج». استخدمت آلات بدل العمالة ← «كيف ننتج». وزعت الناتج على المزارعين والملاك وأرباب الأعمال ← «لمن ننتج».</div></div>
+    </div>
+
+    <div class="card reveal">
+      <h3><span class="n">6</span> منحنى إمكانيات الإنتاج (PPF)</h3>
+      <p style="margin-top:0">هو مجموعة <b>الاختيارات الممكنة</b> التي تكون أمام الاقتصاد عند استخدام الموارد استخداماً كاملاً وكاملاً فقط، وكل اختيار يعني التضحية ببديل آخر.</p>
+      <h4>المثال الأساسي: سلع صناعية × سلع زراعية</h4>
+      <table class="tb">
+        <thead><tr><th>النتاج</th><th>أ</th><th>ب</th><th>ج</th><th>د</th><th>هـ</th><th>و</th></tr></thead>
+        <tbody>
+          <tr><td>سلع زراعية</td><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td></tr>
+          <tr><td>سلع صناعية</td><td>8</td><td>7.5</td><td>6.5</td><td>5</td><td>3</td><td>0</td></tr>
+          <tr class="mark"><td>تكلفة الوحدة الإضافية (صناعي)</td><td>—</td><td>0.5</td><td>1</td><td>1.5</td><td>2</td><td>3</td></tr>
+        </tbody>
+      </table>
+      <svg viewBox="0 0 440 300" class="chart" role="img" aria-label="منحنى إمكانيات الإنتاج">
+        <line class="gridl" x1="60" y1="40" x2="60" y2="250"/><line class="gridl" x1="60" y1="250" x2="410" y2="250"/>
+        <line class="ax" x1="60" y1="20" x2="60" y2="252"/><line class="ax" x1="60" y1="252" x2="405" y2="252"/>
+        <text class="lb" x="20" y="30">صناعي</text><text class="lb" x="370" y="278">زراعي</text>
+        <path class="zone" d="M60,42 Q250,120 400,250 L60,250 Z"/>
+        <path class="curve p" d="M60,42 C190,60 300,120 400,250"/>
+        <circle class="pt p" cx="60" cy="42" r="4.5"/><text class="lb sm" x="70" y="38">أ</text>
+        <circle class="pt p" cx="128" cy="48" r="4"/><text class="lb sm" x="120" y="38">ب</text>
+        <circle class="pt p" cx="196" cy="92" r="4"/><text class="lb sm" x="188" y="82">ج</text>
+        <circle class="pt p" cx="264" cy="140" r="4"/><text class="lb sm" x="256" y="130">د</text>
+        <circle class="pt p" cx="332" cy="196" r="4"/><text class="lb sm" x="324" y="186">هـ</text>
+        <circle class="pt p" cx="398" cy="250" r="4.5"/><text class="lb sm" x="404" y="240">و</text>
+        <circle class="pt" cx="200" cy="200" r="4"/><text class="lb sm" x="208" y="196">ط</text>
+        <circle class="pt" cx="330" cy="80" r="4"/><text class="lb sm" x="338" y="76">ن</text>
+      </svg>
+      <div class="grid g2">
+        <div class="mini"><b class="t">نقطة (أ)</b><p>تخصيص كل الموارد لإنتاج السلع الصناعية = 8 وحدات، وصفر زراعي.</p></div>
+        <div class="mini"><b class="t">نقطة (و)</b><p>تخصيص كل الموارد للزراعة = 5 وحدات، وصفر صناعي.</p></div>
+        <div class="mini"><b class="t">نقطة (ط) داخل المنحنى</b><p>موارد غير مستغلة أو استخدام غير كفء ← يمكن التحسّن دون تضحية.</p></div>
+        <div class="mini"><b class="t">نقطة (ن) خارج المنحنى</b><p>غير ممكنة بهذه الموارد والتكنولوجيا الحالية.</p></div>
+      </div>
+      <div class="def" style="margin-top:12px"><b>قانون زيادة التكلفة البديلة:</b> كلما زاد إنتاج السلعة، زادت التكلفة البديلة للوحدة الإضافية (0.5 → 1 → 1.5 → 2 → 3)، لأن الموارد ليست بنفس الكفاءة في كل استخدام — ولذلك يكون المنحنى <b>مقعراً</b> تجاه نقطة الأصل.</div>
+      <div class="tip note"><span class="ic">📌</span><div><b>ملاحظة الحفظ:</b> كل نقطة على المنحنى = استخدام كامل وكفء • داخل = بطالة/سوء استخدام • خارج = مستحيل حالياً • المنحنى نفسه ينتقل لليمين مع زيادة الموارد أو تحسّن التكنولوجيا.</div></div>
+    </div>
+
+    <div class="card reveal">
+      <h3><span class="n">7</span> التحليل الاقتصادي الجزئي × الكلي</h3>
+      <table class="tb">
+        <thead><tr><th>وجه المقارنة</th><th>الجزئي</th><th>الكلي</th></tr></thead>
+        <tbody>
+          <tr><td>مجال التركيز</td><td class="r">الوحدة الاقتصادية (فرد/مشروع/سوق سلعة)</td><td class="r">الاقتصاد القومي بكل مكوناته</td></tr>
+          <tr><td>المشكلة الاقتصادية</td><td class="r">تُدرس على مستوى الوحدة الاقتصادية</td><td class="r">تُدرس على مستوى الاقتصاد القومي</td></tr>
+          <tr><td>الظواهر</td><td class="r">الظواهر الاقتصادية الفردية</td><td class="r">الظواهر الاقتصادية الكلية</td></tr>
+          <tr><td>يُستخدم في</td><td class="r">تحديد سعر وكمية التوازن في سوق سلعة، وتخصيص الموارد على مستوى المشروع</td><td class="r">تحديد المستوى العام للأسعار، الدخل، التوازن، التوظيف الكامل</td></tr>
+          <tr><td>يُهم بالتقسيم</td><td class="r">التجزئة (الوحدة/الوحدات)</td><td class="r">التجميع (الكل)</td></tr>
+        </tbody>
+      </table>
+      <div class="tip note"><span class="ic">💡</span><div>اختصار: <b>جزئي = عدسة مكبّرة على سلعة واحدة</b> • <b>كلي = صورة بانورامية للاقتصاد كله</b>.</div></div>
+    </div>
+  </section>
+
+  <!-- ============ CHAPTER 2 ============ -->
+  <section id="ch2" class="c2 page">
+    <div class="sec-head">
+      <div class="num">📈</div>
+      <div>
+        <h2>تحليلات نظرية الطلب</h2>
+        <p>المفاهيم — القانون — الجدول والمنحنى — المحددات — التغير في الكمية × التغير في الطلب</p>
+      </div>
+    </div>
+
+    <div class="card reveal">
+      <h3><span class="n">1</span> تعريف الطلب وشروطه</h3>
+      <div class="def"><b>الطلب:</b> الكمية المطلوبة التي يكون لدى المستهلكين <b>الرغبة</b> و<b>القدرة</b> على شرائها عند مختلف الأسعار المحتملة، خلال فترة زمنية معينة، <b>مع افتراض بقاء العوامل الأخرى على حالها</b>.</div>
+      <p>ويُقصد بالطلب هنا: <b>طلب المستهلكين</b> على سلعة معينة، لأن طلب الفرد لا يؤثر في السعر الذي يُحدَّد في السوق.</p>
+      <div class="grid g2">
+        <div class="mini"><b class="t">الشرط الأول: الرغبة</b><p>أن يرغب المستهلك في السلعة فعلاً.</p></div>
+        <div class="mini"><b class="t">الشرط الثاني: القدرة</b><p>أن يكون قادراً مالياً على شرائها.</p></div>
+      </div>
+      <div class="warn note"><span class="ic">⚠</span><div><b>الطلب الفعال = رغبة + قدرة.</b> فقير يتمنى سيارة = رغبة بلا قدرة ⇒ ليس طلباً فعالاً.</div></div>
+
+      <h4>الكمية المطلوبة × الطلب — فرق جوهري</h4>
+      <table class="tb">
+        <thead><tr><th>وجه المقارنة</th><th>الكمية المطلوبة</th><th>الطلب</th></tr></thead>
+        <tbody>
+          <tr><td>المعنى</td><td class="r"><b>نقطة</b> على منحنى الطلب — كمية بعينها أمام سعر معين</td><td class="r"><b>العلاقة الكاملة</b> بين الكمية والأسعار (الجدول/المنحنى كله)</td></tr>
+          <tr><td>التغير</td><td class="r">يتغير بتغير <b>السعر</b> فقط ⇒ حركة على المنحنى</td><td class="r">يتغير بتغير <b>العوامل غير السعرية</b> ⇒ انتقال المنحنى</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card reveal">
+      <h3><span class="n">2</span> دالة الطلب</h3>
+      <p><b>التعريف:</b> هي العلاقة بين الكمية المطلوبة من سلعة معينة وبين العوامل التي تؤثر في هذه الكمية.</p>
+      <div class="def" style="text-align:center;font-size:18px"><b>ك = د (س)</b> &nbsp;|&nbsp; الكمية المطلوبة = دالة (في السعر)</div>
+      <div class="grid g2">
+        <div class="mini"><b class="t">س = المتغير المستقل</b><p>السعر (العامل الذي نغيّره).</p></div>
+        <div class="mini"><b class="t">ك = المتغير التابع</b><p>الكمية المطلوبة (التي تتأثر).</p></div>
+      </div>
+      <p>لكن هناك عوامل أخرى تؤثر في الكمية: الدخل الحقيقي، أسعار السلع الأخرى، عدد المستهلكين/السكان، وعوامل يصعب قياسها مثل الحالة الاقتصادية العامة والأذواق. ولذلك:</p>
+      <div class="def" style="text-align:center;font-size:17px"><b>ك = د (س ، ل)</b> &nbsp; حيث (ل) = أي عامل آخر مؤثر في حجم الطلب</div>
+    </div>
+
+    <div class="card reveal">
+      <h3><span class="n">3</span> قانون الطلب + الرسم البياني</h3>
+      <div class="def"><b>القانون:</b> «الارتفاع في سعر سلعة ما — مع بقاء العوامل الأخرى على حالها — يؤدي إلى <b>نقص</b> الكمية المطلوبة منها، وانخفاض السعر يؤدي إلى <b>زيادة</b> الكمية المطلوبة». أي <b>علاقة عكسية</b> بين السعر والكمية المطلوبة.</div>
+      <svg viewBox="0 0 440 300" class="chart" role="img" aria-label="منحنى الطلب">
+        <line class="gridl" x1="60" y1="60" x2="400" y2="60"/><line class="gridl" x1="60" y1="110" x2="400" y2="110"/>
+        <line class="gridl" x1="60" y1="160" x2="400" y2="160"/><line class="gridl" x1="60" y1="210" x2="400" y2="210"/>
+        <line class="ax" x1="60" y1="20" x2="60" y2="250"/><line class="ax" x1="60" y1="250" x2="405" y2="250"/>
+        <text class="lb" x="18" y="30">السعر</text><text class="lb" x="365" y="276">الكمية</text>
+        <line class="curve d" x1="80" y1="45" x2="380" y2="235"/>
+        <text class="lb sm" x="86" y="38">ط</text><text class="lb sm" x="386" y="232">ط</text>
+        <line class="gridl" x1="60" y1="60" x2="128" y2="60"/><line class="gridl" x1="128" y1="60" x2="128" y2="250"/>
+        <circle class="pt d" cx="128" cy="60" r="4.5"/><text class="lb sm" x="112" y="52">أ</text>
+        <line class="gridl" x1="60" y1="160" x2="268" y2="160"/><line class="gridl" x1="268" y1="160" x2="268" y2="250"/>
+        <circle class="pt d" cx="268" cy="160" r="4.5"/><text class="lb sm" x="252" y="152">ب</text>
+        <text class="lb sm" x="14" y="64">س١</text><text class="lb sm" x="14" y="164">س٢</text>
+        <text class="lb sm" x="124" y="268">ك١</text><text class="lb sm" x="264" y="268">ك٢</text>
+      </svg>
+      <p><b>لماذا المنحنى سالب الميل؟ (سببان أساسيان)</b></p>
+      <div class="grid g2">
+        <div class="mini"><b class="t">① جذب مستهلكين جدد</b><p>انخفاض السعر يجتذب مستهلكين جدداً لم يكن دخلهم يسمح لهم بالشراء من قبل.</p></div>
+        <div class="mini"><b class="t">② زيادة كميات المشترين الحاليين</b><p>انخفاض السعر يدفع القادرين على الشراء بالأسعار المرتفعة إلى زيادة الكميات المشتراة.</p></div>
+      </div>
+    </div>
+
+    <div class="card reveal">
+      <h3><span class="n">4</span> جدول الطلب ومنحناه</h3>
+      <p style="margin-top:0"><b>جدول الطلب:</b> وسيلة إيضاحية رقمية لطبيعة العلاقة بين الكميات المطلوبة عند الأسعار المحتملة (مع ثبات العوامل الأخرى). <b>منحنى الطلب:</b> التعبير البياني عن هذه العلاقة (المحور الأفقي = الكميات، الرأسي = الأسعار).</p>
+      <table class="tb">
+        <thead><tr><th>السعر (س)</th><th>500</th><th>600</th><th>750</th><th>1000</th><th>1400</th></tr></thead>
+        <tbody><tr><td>الكمية المطلوبة (ك)</td><td>60</td><td>50</td><td>40</td><td>30</td><td>20</td></tr></tbody>
+      </table>
+      <div class="ex note"><span class="ic">✎</span><div><b>مثال محلول:</b> لما السعر ينخفض من 1000 إلى 600، الكمية تزيد من 30 إلى 50 وحدة ⇒ علاقة عكسية. وكل نقطة على المنحنى = حالة من الحالات المذكورة في الجدول. المنحنى ينحدر من أعلى اليسار إلى أسفل اليمين ليؤكد القانون.</div></div>
+    </div>
+
+    <div class="card reveal">
+      <h3><span class="n">5</span> الطلب الفردي × طلب السوق</h3>
+      <div class="grid g2">
+        <div class="mini"><b class="t">منحنى الطلب الفردي</b><p>منحنى شخص واحد؛ وكل شخص آخر له منحنى مختلف، لكنها كلها تعكس العلاقة العكسية بين السعر والكمية.</p></div>
+        <div class="mini"><b class="t">منحنى طلب السوق</b><p><b>مجموع</b> منحنيات الطلب الفردية، ويعكس كل الكميات التي يرغب جميع المستهلكين في طلبها عند كل سعر.</p></div>
+      </div>
+      <p><b>طريقة التجميع: أفقيًا</b> (نجمع الكميات عند كل سعر، وليس الأسعار):</p>
+      <table class="tb">
+        <thead><tr><th>السعر</th><th>المستهلك (أ)</th><th>المستهلك (ب)</th><th>المستهلك (ج)</th><th>طلب السوق = أ+ب+ج</th></tr></thead>
+        <tbody>
+          <tr><td>5</td><td>10</td><td>0</td><td>6</td><td><b>16</b></td></tr>
+          <tr><td>4</td><td>15</td><td>1</td><td>9</td><td><b>25</b></td></tr>
+          <tr><td>3</td><td>23</td><td>5</td><td>14</td><td><b>42</b></td></tr>
+          <tr><td>2</td><td>36</td><td>12</td><td>22</td><td><b>70</b></td></tr>
+          <tr><td>1</td><td>60</td><td>20</td><td>30</td><td><b>110</b></td></tr>
+        </tbody>
+      </table>
+      <div class="tip note"><span class="ic">💡</span><div>التجميع <b>أفقي</b> لأننا نجمع <b>كميات</b> عند نفس السعر. (الخطأ الشائع: الجمع الرأسي.)</div></div>
+    </div>
+
+    <div class="card reveal">
+      <h3><span class="n">6</span> العوامل المؤثرة على الطلب (غير سعرية)</h3>
+      <div class="grid g2">
+        <div class="mini"><b class="t">① دخول المستهلكين (الدخل الحقيقي)</b><p>مجموعة السلع والخدمات التي يستطيع المستهلك الحصول عليها بالدخل النقدي.</p></div>
+        <div class="mini"><b class="t">② أسعار السلع الأخرى</b><p><b>بديلة:</b> علاقة طردية • <b>مكملة:</b> علاقة عكسية.</p></div>
+        <div class="mini"><b class="t">③ عدد المستهلكين</b><p>علاقة طردية: زيادة عدد المستهلكين ⇒ زيادة طلب السوق.</p></div>
+        <div class="mini"><b class="t">④ أذواق المستهلكين</b><p>أي مؤثر يغيّر الأذواق والميول يزيد الطلب أو ينقصه.</p></div>
+        <div class="mini" style="grid-column:1/-1"><b class="t">⑤ توقعات المستهلكين</b><p>لو توقعوا ارتفاع السعر في المستقبل القريب ⇒ يزداد الطلب الحالي (والعكس صحيح).</p></div>
+      </div>
+      <h4>السلع العادية × السلع الدنيا</h4>
+      <table class="tb">
+        <thead><tr><th>النوع</th><th>العلاقة بين الدخل والطلب</th><th>مثال</th></tr></thead>
+        <tbody>
+          <tr><td>سلعة عادية</td><td>طردية (دخل ↑ ⇒ طلب ↑)</td><td class="r">اللحوم، الملابس الجيدة</td></tr>
+          <tr><td>سلعة دنيا</td><td>عكسية (دخل ↑ ⇒ طلب ↓)</td><td class="r">السلع الرخيصة البديلة</td></tr>
+        </tbody>
+      </table>
+      <div class="ex note"><span class="ic">✎</span><div><b>مثال:</b> القهوة والشاي بديلان ⇒ ارتفاع سعر الشاي يزيد الطلب على القهوة. السيارات والبنزين مكملان ⇒ ارتفاع سعر السيارات يقلل الطلب على البنزين.</div></div>
+    </div>
+
+    <div class="card reveal">
+      <h3><span class="n">7</span> التغير في الكمية المطلوبة × التغير في الطلب</h3>
+      <div class="grid g2">
+        <div class="mini"><b class="t">تغير في الكمية المطلوبة</b><p>سببه <b>سعر السلعة نفسه فقط</b> (ثبات العوامل الأخرى). بيانياً: <b>انتقال من نقطة إلى نقطة</b> على نفس المنحنى، ويسمى <b>تمدّد</b> أو <b>انكماش</b> الطلب.</p></div>
+        <div class="mini"><b class="t">تغير في الطلب</b><p>سببه تغير <b>عامل غير سعري</b> (أو كلها) ⇒ تتغير دالة الطلب نفسها. بيانياً: <b>انتقال المنحنى بأكمله</b> يميناً (زيادة) أو يساراً (نقص).</p></div>
+      </div>
+      <div class="grid g2">
+        <div>
+          <p style="text-align:center;font-weight:700;font-size:14px;margin-bottom:0">حركة على نفس المنحنى (السعر)</p>
+          <svg viewBox="0 0 400 280" class="chart" role="img" aria-label="حركة على منحنى الطلب">
+            <line class="ax" x1="55" y1="20" x2="55" y2="250"/><line class="ax" x1="55" y1="250" x2="380" y2="250"/>
+            <text class="lb sm" x="18" y="30">السعر</text><text class="lb sm" x="340" y="272">الكمية</text>
+            <line class="curve d" x1="75" y1="45" x2="360" y2="235"/>
+            <circle class="pt d" cx="120" cy="68" r="4"/><text class="lb sm" x="106" y="62">أ</text>
+            <circle class="pt d" cx="205" cy="125" r="4"/><text class="lb sm" x="191" y="119">ب</text>
+            <circle class="pt d" cx="290" cy="182" r="4"/><text class="lb sm" x="276" y="176">ج</text>
+            <text class="lb sm" x="10" y="72">س١</text><text class="lb sm" x="10" y="129">س٢</text><text class="lb sm" x="10" y="186">س٣</text>
+          </svg>
+        </div>
+        <div>
+          <p style="text-align:center;font-weight:700;font-size:14px;margin-bottom:0">انتقال المنحنى (عوامل غير سعرية)</p>
+          <svg viewBox="0 0 400 280" class="chart" role="img" aria-label="انتقال منحنى الطلب">
+            <line class="ax" x1="55" y1="20" x2="55" y2="250"/><line class="ax" x1="55" y1="250" x2="380" y2="250"/>
+            <text class="lb sm" x="18" y="30">السعر</text><text class="lb sm" x="340" y="272">الكمية</text>
+            <line class="curve d" x1="90" y1="45" x2="300" y2="230"/>
+            <line class="curve d" x1="130" y1="45" x2="345" y2="230"/>
+            <line class="curve dash d" x1="52" y1="45" x2="255" y2="230"/>
+            <text class="lb sm" x="98" y="38">ط١</text><text class="lb sm" x="140" y="38">ط٢</text><text class="lb sm" x="40" y="60">ط٣</text>
+            <text class="lb sm" x="24" y="150">زيادة ←</text>
+          </svg>
+        </div>
+      </div>
+
+      <h4>تفسير العلاقة العكسية: أثر الدخل وأثر الإحلال</h4>
+      <div class="def"><b>أثر الدخل:</b> التغير في الكمية المطلوبة نتيجة تغير <b>القوة الشرائية</b> للمستهلك الناتج عن تغير سعر السلعة، مع ثبات العوامل الأخرى.</div>
+      <div class="def"><b>أثر الإحلال:</b> التغير في الكمية المطلوبة نتيجة تغير سعرها مع ثبات العوامل الأخرى، بحيث يميل المستهلك إلى <b>إحلال</b> السلعة التي أصبح سعرها أقل نسبياً محل السلع الأخرى.</div>
+      <div class="ex note"><span class="ic">✎</span><div><b>مثال:</b> سعر اللحم انخفض ⇒ (أثر الإحلال) أشتري لحم بدل الفراخ، و(أثر الدخل) نفس دخلي أصبح يشتري كمية أكبر ⇒ الكمية المطلوبة تزيد.</div></div>
+    </div>
+  </section>
+
+  <!-- ============ CHAPTER 3 ============ -->
+  <section id="ch3" class="c3 page">
+    <div class="sec-head">
+      <div class="num">📦</div>
+      <div>
+        <h2>تحليلات نظرية العرض</h2>
+        <p>المفاهيم — القانون — أنواع العرض — المحددات — التغير في الكمية × التغير في العرض</p>
+      </div>
+    </div>
+
+    <div class="card reveal">
+      <h3><span class="n">1</span> تعريف العرض والكمية المعروضة</h3>
+      <div class="def"><b>العرض:</b> تلك الكميات المعروضة التي <b>يستطيع</b> المنتج أن ينتجها و<b>يرغب</b> في بيعها عند كل سعر معين وفي وقت معين.</div>
+      <div class="def"><b>الكمية المعروضة:</b> نقطة على منحنى العرض، وكمية بعينها يمكن تحديدها داخل جدول العرض أمام سعر معين خلال فترة زمنية معينة (مع ثبات العوامل الأخرى).</div>
+      <div class="tip note"><span class="ic">🔁</span><div><b>لاحظ التوازي:</b> العرض = استطاعة + رغبة في البيع (مثل الطلب = رغبة + قدرة على الشراء).</div></div>
+    </div>
+
+    <div class="card reveal">
+      <h3><span class="n">2</span> دالة العرض وقانونه</h3>
+      <div class="def" style="text-align:center;font-size:18px"><b>ع = د (ل)</b></div>
+      <div class="grid g2">
+        <div class="mini"><b class="t">ع = المتغير التابع</b><p>الكمية المعروضة.</p></div>
+        <div class="mini"><b class="t">ل = المتغير المستقل</b><p>أحد العوامل المؤثرة على العرض (مثل السعر).</p></div>
+      </div>
+      <div class="def"><b>قانون العرض:</b> «ارتفاع سعر السلعة يؤدي إلى زيادة المعروض منها (<b>تمدّد العرض</b>)، وانخفاض السعر يؤدي إلى انخفاض المعروض (<b>انكماش العرض</b>)، وذلك مع ثبات العوامل الأخرى». ⇒ <b>علاقة طردية</b> بين السعر والكمية المعروضة، ويسري على العرض الفردي والعرض الكلي.</div>
+      <svg viewBox="0 0 440 300" class="chart" role="img" aria-label="منحنى العرض">
+        <line class="gridl" x1="60" y1="60" x2="400" y2="60"/><line class="gridl" x1="60" y1="110" x2="400" y2="110"/>
+        <line class="gridl" x1="60" y1="160" x2="400" y2="160"/><line class="gridl" x1="60" y1="210" x2="400" y2="210"/>
+        <line class="ax" x1="60" y1="20" x2="60" y2="250"/><line class="ax" x1="60" y1="250" x2="405" y2="250"/>
+        <text class="lb" x="18" y="30">السعر</text><text class="lb" x="365" y="276">الكمية</text>
+        <line class="curve s" x1="85" y1="235" x2="375" y2="50"/>
+        <text class="lb sm" x="80" y="250">ع</text><text class="lb sm" x="380" y="48">ع</text>
+        <line class="gridl" x1="60" y1="160" x2="200" y2="160"/><line class="gridl" x1="200" y1="160" x2="200" y2="250"/>
+        <circle class="pt s" cx="200" cy="160" r="4.5"/><text class="lb sm" x="206" y="154">أ</text>
+        <line class="gridl" x1="60" y1="85" x2="310" y2="85"/><line class="gridl" x1="310" y1="85" x2="310" y2="250"/>
+        <circle class="pt s" cx="310" cy="85" r="4.5"/><text class="lb sm" x="316" y="79">ب</text>
+        <text class="lb sm" x="14" y="164">س١</text><text class="lb sm" x="14" y="89">س٢</text>
+        <text class="lb sm" x="194" y="268">ك١</text><text class="lb sm" x="304" y="268">ك٢</text>
+      </svg>
+      <div class="tip note"><span class="ic">💡</span><div><b>حيلة الحفظ:</b> الطلب ينزل (عكسي) — العرض يطلع (طردي). «اللي بيعرض بيطلب سعر أعلى».</div></div>
+    </div>
+
+    <div class="card reveal">
+      <h3><span class="n">3</span> أنواع العرض</h3>
+      <div class="grid g2">
+        <div class="mini"><b class="t">العرض الفردي</b><p>عرض بائع أو منتج واحد من السلعة عند سعر معين. <b>أثر السعر عليه أقل</b> منه في العرض الكلي (مع ثبات العوامل الأخرى).</p></div>
+        <div class="mini"><b class="t">العرض الكلي (عرض السوق)</b><p>مجموع ما يقبل البائعون/المنتجون عرضه من السلعة في السوق بسعر معين وظروف معينة. <b>أثر السعر عليه أكبر</b> من العرض الفردي.</p></div>
+      </div>
+    </div>
+
+    <div class="card reveal">
+      <h3><span class="n">4</span> جدول العرض ومنحناه</h3>
+      <p style="margin-top:0"><b>جدول العرض:</b> التعبير الرقمي للعلاقة الطردية بين السعر والكمية المعروضة — أي صورة رقمية لاستعداد البائعين لعرض كمية معينة عند أسعار مختلفة.</p>
+      <table class="tb">
+        <thead><tr><th>السعر</th><th>100</th><th>150</th><th>200</th><th>250</th><th>300</th></tr></thead>
+        <tbody><tr><td>الكمية المعروضة</td><td>80</td><td>200</td><td>300</td><td>390</td><td>470</td></tr></tbody>
+      </table>
+      <p><b>منحنى العرض:</b> خط بياني يصور العلاقة بين الكمية المعروضة وسعر الوحدة، وهو التعبير البياني لجدول العرض، ويلاحظ أنه <b>يتجه إلى اليمين</b> (صاعد).</p>
+    </div>
+
+    <div class="card reveal">
+      <h3><span class="n">5</span> العوامل المحددة للعرض (غير سعرية)</h3>
+      <div class="grid g2">
+        <div class="mini"><b class="t">① تغير تكاليف الإنتاج</b><p>انخفاض التكاليف ⇒ إنتاج كميات أكبر عند كل سعر ⇒ زيادة العرض. (علاقة عكسية بين التكاليف والعرض)</p></div>
+        <div class="mini"><b class="t">② عدد المنتجين</b><p>زيادة عدد المنتجين ⇒ زيادة العرض. (علاقة <b>طردية</b>)</p></div>
+        <div class="mini"><b class="t">③ أسعار عناصر الإنتاج</b><p>ارتفاعها ⇒ ارتفاع التكاليف ⇒ قلة العرض. (علاقة <b>عكسية</b>)</p></div>
+        <div class="mini"><b class="t">④ الضرائب والإعانات</b><p>الضرائب: عكسية (تكاليف ↑ ⇒ أرباح ↓ ⇒ عرض ↓). الإعانات: <b>طردية</b>.</p></div>
+        <div class="mini"><b class="t">⑤ توقعات المنتجين للأسعار</b><p>توقع ارتفاع السعر مستقبلاً ⇒ الإحجام عن البيع الآن والاحتفاظ بالسلعة ⇒ <b>يقل</b> المعروض حالياً (أثر قصير الأجل).</p></div>
+        <div class="mini"><b class="t">⑥ أسعار السلع الأخرى</b><p>يظهر في <b>السلع المتلازمة في العرض</b>: تمدّد عرض سلعة نتيجة ارتفاع أسعارها ⇒ يزيد عرض السلعة الأخرى.</p></div>
+        <div class="mini" style="grid-column:1/-1"><b class="t">⑦ تغير تكنولوجيا الإنتاج</b><p>استخدام طرق أفضل لإنتاج نفس السلعة ⇒ تغير الجهد والتكاليف ⇒ <b>انتقال منحنى العرض</b>.</p></div>
+      </div>
+    </div>
+
+    <div class="card reveal">
+      <h3><span class="n">6</span> التغير في الكمية المعروضة × التغير في العرض</h3>
+      <div class="grid g2">
+        <div class="mini"><b class="t">تغير في الكمية المعروضة</b><p>بسبب تغير <b>سعر السلعة نفسها فقط</b> ⇒ حركة من نقطة إلى نقطة على <b>نفس</b> منحنى العرض (تمدّد/انكماش)، سواء كانت العلاقة خطية أو غير خطية.</p></div>
+        <div class="mini"><b class="t">تغير في العرض</b><p>بسبب تغير <b>أحد محددات العرض غير السعرية</b> ⇒ تتغير دالة العرض ⇒ <b>انتقال المنحنى بأكمله</b> يميناً (زيادة) أو يساراً (نقص).</p></div>
+      </div>
+      <div class="grid g2">
+        <div>
+          <p style="text-align:center;font-weight:700;font-size:14px;margin-bottom:0">حركة على نفس المنحنى (السعر)</p>
+          <svg viewBox="0 0 400 280" class="chart" role="img" aria-label="حركة على منحنى العرض">
+            <line class="ax" x1="55" y1="20" x2="55" y2="250"/><line class="ax" x1="55" y1="250" x2="380" y2="250"/>
+            <text class="lb sm" x="18" y="30">السعر</text><text class="lb sm" x="340" y="272">الكمية</text>
+            <line class="curve s" x1="80" y1="230" x2="350" y2="45"/>
+            <circle class="pt s" cx="120" cy="193" r="4"/><text class="lb sm" x="106" y="187">أ</text>
+            <circle class="pt s" cx="215" cy="137" r="4"/><text class="lb sm" x="201" y="131">ب</text>
+            <circle class="pt s" cx="310" cy="82" r="4"/><text class="lb sm" x="296" y="76">ج</text>
+            <text class="lb sm" x="10" y="197">س١</text><text class="lb sm" x="10" y="141">س٢</text><text class="lb sm" x="10" y="86">س٣</text>
+          </svg>
+        </div>
+        <div>
+          <p style="text-align:center;font-weight:700;font-size:14px;margin-bottom:0">انتقال المنحنى (عوامل غير سعرية)</p>
+          <svg viewBox="0 0 400 280" class="chart" role="img" aria-label="انتقال منحنى العرض">
+            <line class="ax" x1="55" y1="20" x2="55" y2="250"/><line class="ax" x1="55" y1="250" x2="380" y2="250"/>
+            <text class="lb sm" x="18" y="30">السعر</text><text class="lb sm" x="340" y="272">الكمية</text>
+            <line class="curve s" x1="90" y1="230" x2="290" y2="40"/>
+            <line class="curve s" x1="150" y1="230" x2="350" y2="40"/>
+            <line class="curve dash s" x1="35" y1="230" x2="230" y2="40"/>
+            <text class="lb sm" x="80" y="265">ع١</text><text class="lb sm" x="140" y="265">ع٢</text><text class="lb sm" x="26" y="265">ع٣</text>
+            <text class="lb sm" x="70" y="120">زيادة العرض ←</text>
+          </svg>
+        </div>
+      </div>
+      <div class="warn note"><span class="ic">⚠</span><div><b>أشهر خطأ في الامتحان:</b> تغيّر سعر السلعة نفسها <b>لا</b> ينقل المنحنى؛ هو حركة عليه. أما تغيّر أي عامل آخر فينقل المنحنى كله.</div></div>
+    </div>
+
+    <div class="card reveal">
+      <h3><span class="n">7</span> جدول مقارنة سريع: الطلب × العرض</h3>
+      <table class="tb">
+        <thead><tr><th>وجه المقارنة</th><th>الطلب</th><th>العرض</th></tr></thead>
+        <tbody>
+          <tr><td>الطرف</td><td>المستهلك</td><td>المنتج/البائع</td></tr>
+          <tr><td>الشرطان</td><td>رغبة + قدرة على الشراء</td><td>استطاعة + رغبة في البيع</td></tr>
+          <tr><td>العلاقة بين السعر والكمية</td><td>عكسية</td><td>طردية</td></tr>
+          <tr><td>ميل المنحنى</td><td>سالب (هابط)</td><td>موجب (صاعد)</td></tr>
+          <tr><td>الدالة</td><td>ك = د(س)</td><td>ع = د(ل)</td></tr>
+          <tr><td>زيادة السعر تؤدي إلى</td><td>نقص الكمية المطلوبة</td><td>زيادة الكمية المعروضة</td></tr>
+          <tr><td>التجميع للسوق</td><td>أفقي (جمع الكميات)</td><td>أفقي (جمع الكميات)</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============ EXERCISES ============ -->
+  <style>
+    .sol{background:linear-gradient(135deg,#f0fdf4,#ecfdf5);border:1px solid #86efac;border-inline-start:5px solid #10b981;
+      border-radius:12px;padding:12px 16px;margin:10px 0;font-size:15px}
+    .sol .h{display:block;font-family:'Cairo';font-weight:800;color:#047857;font-size:13.5px;margin-bottom:5px;letter-spacing:.2px}
+    .sol b{color:#065f46}
+    .sol ul{margin:6px 0;padding-inline-start:20px}
+    .sol li{margin:3px 0}
+    .tag{display:inline-block;background:#111827;color:#fff;font-size:11.5px;font-weight:700;padding:3px 10px;border-radius:999px;margin-inline-end:6px}
+    .tag.g{background:#059669}.tag.o{background:#d97706}.tag.b{background:#2563eb}
+  </style>
+
+  <section id="exercises" class="page">
+    <div class="sec-head">
+      <div class="num" style="background:linear-gradient(135deg,#0f766e,#14b8a6)">✍️</div>
+      <div>
+        <h2>السكاشن بالحل الكامل</h2>
+        <p>سكشن (1): منحنى إمكانيات الإنتاج — سكشن (2): نظرية الطلب</p>
+      </div>
+    </div>
+
+    <!-- SECTION 1 -->
+    <div class="card reveal" style="border-top:4px solid #14b8a6">
+      <h3 style="color:#0f766e">السكشن الأول — منحنى إمكانيات الإنتاج</h3>
+
+      <div class="qbox">
+        <span class="qn">السؤال الأول</span>
+        <h4>جدول يوضح أقصى كميات يمكن إنتاجها من الملابس عند مستويات مختلفة من إنتاج الغذاء</h4>
+        <table class="tb">
+          <thead><tr><th>الغذاء</th><th>0</th><th>10</th><th>20</th><th>30</th><th>40</th></tr></thead>
+          <tbody><tr><td>الملابس</td><td>40</td><td>38</td><td>34</td><td>27</td><td>15</td></tr></tbody>
+        </table>
+        <p><b>المطلوب:</b> ① مثّل البيانات بيانياً (الغذاء أفقي، الملابس رأسي). ② هل تكلفة الفرصة البديلة للغذاء ثابتة أم متزايدة؟</p>
+
+        <svg viewBox="0 0 450 300" class="chart" role="img" aria-label="منحنى إمكانيات الإنتاج للغذاء والملابس">
+          <line class="gridl" x1="60" y1="40" x2="400" y2="40"/><line class="gridl" x1="60" y1="92" x2="400" y2="92"/>
+          <line class="gridl" x1="60" y1="145" x2="400" y2="145"/><line class="gridl" x1="60" y1="197" x2="400" y2="197"/>
+          <line class="ax" x1="60" y1="20" x2="60" y2="250"/><line class="ax" x1="60" y1="250" x2="405" y2="250"/>
+          <text class="lb" x="14" y="30">ملابس</text><text class="lb" x="368" y="276">غذاء</text>
+          <path class="zone" d="M60,40 L142,51 L225,72 L307,108 L390,171 L60,250 Z"/>
+          <path class="curve p" d="M60,40 L142,51 L225,72 L307,108 L390,171"/>
+          <circle class="pt p" cx="60" cy="40" r="4.5"/><text class="lb sm" x="42" y="34">40</text>
+          <circle class="pt p" cx="142" cy="51" r="4.5"/><text class="lb sm" x="134" y="44">38</text>
+          <circle class="pt p" cx="225" cy="72" r="4.5"/><text class="lb sm" x="217" y="65">34</text>
+          <circle class="pt p" cx="307" cy="108" r="4.5"/><text class="lb sm" x="299" y="101">27</text>
+          <circle class="pt p" cx="390" cy="171" r="4.5"/><text class="lb sm" x="382" y="164">15</text>
+          <text class="lb sm" x="54" y="266">0</text><text class="lb sm" x="134" y="266">10</text>
+          <text class="lb sm" x="217" y="266">20</text><text class="lb sm" x="299" y="266">30</text><text class="lb sm" x="382" y="266">40</text>
+        </svg>
+
+        <div class="sol"><span class="h">✔ الحل</span>
+          <p><b>① الرسم:</b> الغذاء على المحور الأفقي والملابس على المحور الرأسي، ونصل النقاط (0،40) (10،38) (20،34) (30،27) (40،15) بمنحنى مقعّر تجاه نقطة الأصل.</p>
+          <p><b>② حساب التكلفة البديلة للغذاء</b> (كم وحدة ملابس نضحّي بها لإنتاج 10 وحدات غذاء إضافية):</p>
+          <ul>
+            <li>من 0 → 10 غذاء: 40 − 38 = <b>2</b> ملابس</li>
+            <li>من 10 → 20: 38 − 34 = <b>4</b></li>
+            <li>من 20 → 30: 34 − 27 = <b>7</b></li>
+            <li>من 30 → 40: 27 − 15 = <b>12</b></li>
+          </ul>
+          <p>الأرقام (2، 4، 7، 12) تتزايد ⇒ <b>تكلفة الفرصة البديلة متزايدة</b>، وهذا يفسّر تقعّر المنحنى.</p>
+        </div>
+      </div>
+
+      <div class="qbox">
+        <span class="qn">السؤال الثاني</span>
+        <h4>اقتصاد دولة ينتج سلعتين فقط: أجهزة كمبيوتر وهواتف محمولة</h4>
+        <table class="tb">
+          <thead><tr><th>كمبيوتر</th><th>100</th><th>90</th><th>70</th><th>40</th><th>0</th></tr></thead>
+          <tbody><tr><td>هاتف</td><td>0</td><td>10</td><td>20</td><td>30</td><td>40</td></tr></tbody>
+        </table>
+        <p><b>المطلوب:</b> ① تكلفة الفرصة البديلة لكل 10 أجهزة كمبيوتر إضافية. ② هل هي متزايدة؟ ③ ماذا يخبرنا ذلك عن شكل المنحنى؟</p>
+
+        <svg viewBox="0 0 450 300" class="chart" role="img" aria-label="منحنى إمكانيات الإنتاج الخطي">
+          <line class="gridl" x1="60" y1="40" x2="400" y2="40"/><line class="gridl" x1="60" y1="92" x2="400" y2="92"/>
+          <line class="gridl" x1="60" y1="145" x2="400" y2="145"/><line class="gridl" x1="60" y1="197" x2="400" y2="197"/>
+          <line class="ax" x1="60" y1="20" x2="60" y2="250"/><line class="ax" x1="60" y1="250" x2="405" y2="250"/>
+          <text class="lb" x="10" y="30">هاتف</text><text class="lb" x="350" y="276">كمبيوتر</text>
+          <path class="zone" d="M60,40 L380,250 L60,250 Z"/>
+          <line class="curve p" x1="60" y1="40" x2="380" y2="250"/>
+          <circle class="pt p" cx="60" cy="40" r="4.5"/><text class="lb sm" x="44" y="34">40</text>
+          <circle class="pt p" cx="380" cy="250" r="4.5"/><text class="lb sm" x="374" y="268">100</text>
+          <text class="lb sm" x="54" y="266">0</text>
+        </svg>
+
+        <div class="sol"><span class="h">✔ الحل</span>
+          <ul>
+            <li>100 → 90 كمبيوتر: 10 − 0 = <b>10 هواتف</b></li>
+            <li>90 → 70: 20 − 10 = <b>10 هواتف</b></li>
+            <li>70 → 40: 30 − 20 = <b>10 هواتف</b></li>
+            <li>40 → 0: 40 − 30 = <b>10 هواتف</b></li>
+          </ul>
+          <p>② التكلفة <b>ثابتة</b> (10 هواتف لكل 10 أجهزة كمبيوتر).<br>
+          ③ إذن منحنى إمكانيات الإنتاج <b>خط مستقيم</b> (لا يوجد تقعّر) لأن الموارد قابلة للتحويل بين الاستخدامين بنفس المعدل — وهذا يعني <b>تكلفة فرصة بديلة ثابتة</b>.</p>
+        </div>
+      </div>
+
+      <div class="qbox">
+        <span class="qn">السؤال الثالث</span>
+        <h4>منحنى إمكانيات الإنتاج يمر بالنقاط: أ(0،100) ب(20،90) ج(40،70) د(60،40) هـ(80،0)</h4>
+        <p><b>المطلوب:</b> حدّد ما إذا كانت النقاط: و(40،70)، ز(30،50)، ح(50،80)، ط(60،40)، ى(10،20) تمثل إنتاجاً <b>كفؤاً</b> أو <b>غير كفؤ</b> أو <b>غير ممكن</b>، مع ذكر السبب.</p>
+        <div class="sol"><span class="h">✔ الحل</span>
+          <p>نقارن كل نقطة بالمنحنى عند نفس الكمية الأفقية:</p>
+          <ul>
+            <li><b>و (40،70):</b> تقع <b>على</b> المنحنى (نفس نقطة ج) ⇒ <b>كفؤة</b> — استخدام كامل وكفء للموارد.</li>
+            <li><b>ز (30،50):</b> المنحنى عند 30 يعطي 80، والنقطة 50 أقل ⇒ <b>داخل</b> المنحنى ⇒ <b>غير كفؤة</b> (موارد غير مستغلة / سوء استخدام، ويمكن زيادة الإنتاج دون تضحية).</li>
+            <li><b>ط (60،40):</b> تقع على المنحنى (نفس نقطة د) ⇒ <b>كفؤة</b>.</li>
+            <li><b>ى (10،20):</b> المنحنى عند 10 يعطي 95، والنقطة 20 أقل بكثير ⇒ <b>داخل</b> المنحنى ⇒ <b>غير كفؤة</b>.</li>
+            <li><b>ح (50،80):</b> المنحنى عند 50 يعطي 55، والنقطة 80 أعلى ⇒ <b>خارج</b> المنحنى ⇒ <b>غير ممكنة</b> بالموارد والتكنولوجيا الحالية.</li>
+          </ul>
+          <p><b>القاعدة:</b> على المنحنى = كفء • داخل = غير كفء • خارج = غير ممكن.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 2 -->
+    <div class="card reveal" style="border-top:4px solid #0ea5e9">
+      <h3 style="color:#0369a1">السكشن الثاني — نظرية الطلب</h3>
+
+      <h4 style="margin-top:6px"><span class="tag b">أولاً</span> أجب عن الأسئلة التالية</h4>
+
+      <div class="qbox" style="box-shadow:none;background:#fbfcff">
+        <p><b>1) ما المقصود بالطلب؟ وما الشرطان اللازمان لوجود الطلب الفعال؟</b></p>
+        <div class="sol"><span class="h">✔ الإجابة</span> الطلب هو الكميات المطلوبة التي يكون لدى المستهلكين الرغبة والقدرة على شرائها عند مختلف الأسعار المحتملة خلال فترة زمنية معينة مع ثبات العوامل الأخرى. والشرطان: <b>الرغبة</b> في شراء السلعة + <b>القدرة</b> (الشرائية) على شرائها.</div>
+      </div>
+
+      <div class="qbox" style="box-shadow:none;background:#fbfcff">
+        <p><b>2) ما المقصود بالكمية المطلوبة؟ وما الفرق بينها وبين الطلب؟</b></p>
+        <div class="sol"><span class="h">✔ الإجابة</span> الكمية المطلوبة هي <b>كمية بعينها</b> عند سعر معين، وتمثل <b>نقطة واحدة</b> على منحنى الطلب. أما الطلب فهو <b>العلاقة الكاملة</b> بين الأسعار والكميات المطلوبة (الجدول أو المنحنى بأكمله).</div>
+      </div>
+
+      <div class="qbox" style="box-shadow:none;background:#fbfcff">
+        <p><b>3) عرّف دالة الطلب، وحدّد المتغير التابع والمستقل.</b></p>
+        <div class="sol"><span class="h">✔ الإجابة</span> دالة الطلب هي العلاقة بين الكمية المطلوبة من سلعة وبين العوامل المؤثرة فيها: <b>ك = د(س)</b>. المتغير <b>المستقل = السعر (س)</b>، والمتغير <b>التابع = الكمية المطلوبة (ك)</b>.</div>
+      </div>
+
+      <div class="qbox" style="box-shadow:none;background:#fbfcff">
+        <p><b>4) اكتب قانون الطلب بأسلوبك، ثم وضّح طبيعة العلاقة بين السعر والكمية المطلوبة مع الرسم البياني.</b></p>
+        <div class="sol"><span class="h">✔ الإجابة</span> القانون: كلما ارتفع سعر السلعة (مع ثبات العوامل الأخرى) قلّت الكمية المطلوبة منها، وكلما انخفض سعرها زادت الكمية المطلوبة. ⇒ العلاقة <b>عكسية</b>، والمنحنى <b>سالب الميل</b> ينحدر من أعلى اليسار إلى أسفل اليمين (راجع رسم الفصل الثاني).</div>
+      </div>
+
+      <div class="qbox" style="box-shadow:none;background:#fbfcff">
+        <p><b>5) لماذا يكون منحنى الطلب سالب الميل عادة؟ اذكر سببين.</b></p>
+        <div class="sol"><span class="h">✔ الإجابة</span> ① انخفاض السعر يجتذب <b>مستهلكين جدداً</b> لم يكن دخلهم يسمح بالشراء. ② انخفاض السعر يدفع المشترين الحاليين إلى <b>زيادة الكميات المشتراة</b>. (ويمكن إضافة أثر الدخل وأثر الإحلال.)</div>
+      </div>
+
+      <div class="qbox" style="box-shadow:none;background:#fbfcff">
+        <p><b>6) ما المقصود بكل من: أثر الدخل، وأثر الإحلال؟</b></p>
+        <div class="sol"><span class="h">✔ الإجابة</span> <b>أثر الدخل:</b> تغير الكمية المطلوبة نتيجة تغير القوة الشرائية للمستهلك بسبب تغير سعر السلعة مع ثبات العوامل الأخرى. <b>أثر الإحلال:</b> تغير الكمية المطلوبة نتيجة تغير سعرها، فيميل المستهلك إلى إحلال السلعة التي أصبح سعرها أقل نسبياً محل السلع الأخرى.</div>
+      </div>
+
+      <div class="qbox" style="box-shadow:none;background:#fbfcff">
+        <p><b>7) ما الفرق بين منحنى الطلب الفردي ومنحنى طلب السوق؟</b></p>
+        <div class="sol"><span class="h">✔ الإجابة</span> الفردي يخص <b>مستهلكاً واحداً</b>، وطلب السوق هو <b>التجميع الأفقي</b> لمنحنيات الطلب الفردية لجميع المستهلكين عند كل سعر، فيعكس الكميات التي يرغب الجميع في طلبها.</div>
+      </div>
+
+      <h4><span class="tag g">ثانياً</span> اختر الإجابة الصحيحة</h4>
+      <table class="tb">
+        <thead><tr><th>#</th><th>السؤال</th><th>الإجابة</th><th>التعليل</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td class="r">الطلب الفعال يعني…</td><td><b>ج) الرغبة والقدرة على شراء السلعة</b></td><td class="r">الطلب = رغبة + قدرة</td></tr>
+          <tr><td>2</td><td class="r">عند انخفاض سعر السلعة (ثبات العوامل) الكمية المطلوبة…</td><td><b>ب) تزيد</b></td><td class="r">علاقة عكسية</td></tr>
+          <tr><td>3</td><td class="r">المحور الرأسي في منحنى الطلب يمثل…</td><td><b>ب) السعر</b></td><td class="r">الأفقي = الكمية</td></tr>
+          <tr><td>4</td><td class="r">ارتفع دخل المستهلك وزادت الكمية المطلوبة ⇒ السلعة…</td><td><b>ب) عادية</b></td><td class="r">علاقة طردية مع الدخل</td></tr>
+          <tr><td>5</td><td class="r">العلاقة بين سعر سلعة بديلة والطلب على السلعة محل الدراسة…</td><td><b>ب) طردية</b></td><td class="r">سعر البديل ↑ ⇒ طلب سلعتنا ↑</td></tr>
+          <tr><td>6</td><td class="r">العلاقة بين سعر السلعة المكملة والطلب على السلعة…</td><td><b>ج) عكسية</b></td><td class="r">سعر المكمل ↑ ⇒ طلب سلعتنا ↓</td></tr>
+          <tr><td>7</td><td class="r">زيادة عدد المستهلكين تؤدي إلى…</td><td><b>ب) زيادة طلب السوق</b></td><td class="r">علاقة طردية</td></tr>
+          <tr><td>8</td><td class="r">توقع المستهلكين ارتفاع السعر مستقبلاً ⇒ الطلب الحالي…</td><td><b>ب) يزداد</b></td><td class="r">يشتري الآن قبل الغلاء</td></tr>
+        </tbody>
+      </table>
+
+      <h4><span class="tag o">ثالثاً</span> صح أم خطأ مع التصحيح</h4>
+      <table class="tb">
+        <thead><tr><th>#</th><th>العبارة</th><th>الحكم</th><th>التصحيح</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td class="r">الطلب هو مجرد الرغبة في شراء السلعة دون القدرة على شرائها</td><td style="color:#b91c1c;font-weight:700">خطأ</td><td class="r">الطلب الفعال = الرغبة + القدرة معاً</td></tr>
+          <tr><td>2</td><td class="r">ارتفاع السعر مع ثبات العوامل الأخرى يؤدي إلى زيادة الكمية المطلوبة</td><td style="color:#b91c1c;font-weight:700">خطأ</td><td class="r">يؤدي إلى <b>نقص</b> الكمية المطلوبة (علاقة عكسية)</td></tr>
+          <tr><td>3</td><td class="r">كل نقطة على منحنى الطلب تمثل حالة معينة من السعر والكمية المطلوبة</td><td style="color:#047857;font-weight:700">صح</td><td class="r">—</td></tr>
+          <tr><td>4</td><td class="r">منحنى طلب السوق ينتج عن التجميع الرأسي لمنحنيات الطلب الفردية</td><td style="color:#b91c1c;font-weight:700">خطأ</td><td class="r">التجميع <b>أفقي</b> (جمع الكميات عند كل سعر)</td></tr>
+          <tr><td>5</td><td class="r">السلع العادية ترتبط بالدخل بعلاقة طردية</td><td style="color:#047857;font-weight:700">صح</td><td class="r">—</td></tr>
+          <tr><td>6</td><td class="r">السلع الدنيا يزداد الطلب عليها عندما يرتفع دخل المستهلك</td><td style="color:#b91c1c;font-weight:700">خطأ</td><td class="r"><b>يقل</b> الطلب عليها (علاقة عكسية مع الدخل)</td></tr>
+          <tr><td>7</td><td class="r">زيادة عدد المستهلكين تؤدي إلى زيادة طلب السوق</td><td style="color:#047857;font-weight:700">صح</td><td class="r">—</td></tr>
+          <tr><td>8</td><td class="r">تغير سعر السلعة نفسها يؤدي إلى تغير الطلب كله وانتقال منحنى الطلب</td><td style="color:#b91c1c;font-weight:700">خطأ</td><td class="r">يؤدي إلى تغير <b>الكمية المطلوبة</b> فقط (حركة على المنحنى)</td></tr>
+          <tr><td>9</td><td class="r">تغير أحد العوامل غير السعرية يؤدي إلى تغير الطلب وانتقال منحنى الطلب</td><td style="color:#047857;font-weight:700">صح</td><td class="r">—</td></tr>
+        </tbody>
+      </table>
+
+      <h4><span class="tag">رابعاً</span> جدول الطلب التالي</h4>
+      <table class="tb">
+        <thead><tr><th>السعر</th><th>500</th><th>600</th><th>750</th><th>1000</th><th>1400</th></tr></thead>
+        <tbody><tr><td>الكمية المطلوبة</td><td>60</td><td>50</td><td>40</td><td>30</td><td>20</td></tr></tbody>
+      </table>
+      <div class="sol"><span class="h">✔ الحل</span>
+        <p><b>1) نوع العلاقة:</b> <b>عكسية</b> — كلما ارتفع السعر انخفضت الكمية المطلوبة (500⇒60 … 1400⇒20).</p>
+        <p><b>2) ارتفاع السعر من 600 إلى 1000:</b> الكمية تنخفض من <b>50 إلى 30</b> وحدة (نقص 20 وحدة).</p>
+        <p><b>3) انخفاض السعر من 1400 إلى 750:</b> الكمية تزيد من <b>20 إلى 40</b> وحدة (زيادة 20 وحدة).</p>
+        <p><b>4) الرسم:</b> السعر على المحور الرأسي والكمية على الأفقي، نصل النقاط (60،500) (50،600) (40،750) (30،1000) (20،1400) بخط هابط من أعلى اليسار إلى أسفل اليمين.</p>
+      </div>
+      <svg viewBox="0 0 450 300" class="chart" role="img" aria-label="منحنى الطلب من جدول السكشن">
+        <line class="ax" x1="60" y1="20" x2="60" y2="250"/><line class="ax" x1="60" y1="250" x2="405" y2="250"/>
+        <text class="lb" x="18" y="30">السعر</text><text class="lb" x="360" y="276">الكمية</text>
+        <text class="lb sm" x="22" y="46">1400</text><text class="lb sm" x="22" y="92">1000</text>
+        <text class="lb sm" x="26" y="138">750</text><text class="lb sm" x="26" y="184">600</text><text class="lb sm" x="26" y="230">500</text>
+        <line class="curve d" x1="120" y1="40" x2="340" y2="232"/>
+        <circle class="pt d" cx="120" cy="40" r="4"/><circle class="pt d" cx="175" cy="88" r="4"/>
+        <circle class="pt d" cx="230" cy="134" r="4"/><circle class="pt d" cx="285" cy="180" r="4"/>
+        <circle class="pt d" cx="340" cy="226" r="4"/>
+        <text class="lb sm" x="112" y="272">20</text><text class="lb sm" x="167" y="272">30</text>
+        <text class="lb sm" x="222" y="272">40</text><text class="lb sm" x="277" y="272">50</text><text class="lb sm" x="332" y="272">60</text>
+      </svg>
+
+      <h4><span class="tag b">خامساً</span> وضّح بالرسم البياني والشرح</h4>
+      <table class="tb">
+        <thead><tr><th>الحالة</th><th>ما يحدث للطلب</th><th>حركة المنحنى</th></tr></thead>
+        <tbody>
+          <tr><td class="r">1) ارتفع دخل المستهلكين والسلعة <b>عادية</b></td><td>الطلب <b>يزيد</b></td><td>انتقال لليمين</td></tr>
+          <tr><td class="r">2) انخفض الدخل والسلعة <b>دنيا</b></td><td>الطلب <b>يزيد</b> (علاقة عكسية)</td><td>انتقال لليمين</td></tr>
+          <tr><td class="r">3) ارتفع سعر الشاي (بديل للقهوة)</td><td>الطلب على القهوة <b>يزيد</b></td><td>انتقال لليمين</td></tr>
+          <tr><td class="r">4) ارتفع سعر السيارات (مكملة للبنزين)</td><td>الطلب على البنزين <b>يقل</b></td><td>انتقال لليسار</td></tr>
+          <tr><td class="r">5) زاد عدد المستهلكين</td><td>طلب السوق <b>يزيد</b></td><td>انتقال لليمين</td></tr>
+          <tr><td class="r">6) أصبحت السلعة أكثر تفضيلاً (أذواق)</td><td>الطلب <b>يزيد</b></td><td>انتقال لليمين</td></tr>
+          <tr><td class="r">7) توقع المستهلكون ارتفاع السعر مستقبلاً</td><td>الطلب الحالي <b>يزيد</b></td><td>انتقال لليمين</td></tr>
+        </tbody>
+      </table>
+      <div class="tip note"><span class="ic">💡</span><div><b>القاعدة الذهبية:</b> أي زيادة في الطلب = المنحنى ينتقل <b>لليمين</b> (عند كل سعر تُطلب كمية أكبر). أي نقص = انتقال <b>لليسار</b>. وارتفاع/انخفاض السعر نفسه = <b>حركة على المنحنى فقط</b>.</div></div>
+    </div>
+  </section>
+
+  <!-- ============ QUIZ ============ -->
+  <section id="quizSec" class="page">
+    <div class="sec-head">
+      <div class="num" style="background:linear-gradient(135deg,#111827,#4338ca)">🧠</div>
+      <div>
+        <h2>اختبر نفسك — 10 أسئلة سريعة</h2>
+        <p>اضغط على الإجابة، هيظهر لك التصحيح فوراً مع السبب</p>
+      </div>
+    </div>
+    <div id="quiz">
+      <h3>كويز الفصول الثلاثة</h3>
+      <div class="qmeta">الدرجة تظهر في الأسفل — أعد المحاولة كما تشاء</div>
+      <div id="qlist"></div>
+      <div class="qscore"><span>النتيجة: <b id="sc">0</b> / 10</span><button class="btn" id="reset">إعادة المحاولة</button></div>
+    </div>
+
+    <div class="card reveal" style="margin-top:18px">
+      <h3 style="color:#111827">خلاصة المراجعة الأخيرة (اقرأها قبل الامتحان)</h3>
+      <div class="grid g3">
+        <div class="mini"><b class="t" style="color:#6b21a8">الفصل الأول</b><p>اقتصاد = ندرة + اختيار • عناصر الإنتاج: عمل/رأس مال/أرض/تنظيم • العوائد: أجر/فائدة/ريع/ربح • المشكلة: ماذا، كيف، لمن • PPF: على المنحنى كفء، داخل غير كفء، خارج مستحيل • تكلفة بديلة متزايدة ⇒ منحنى مقعّر.</p></div>
+        <div class="mini"><b class="t" style="color:#0369a1">الفصل الثاني</b><p>طلب = رغبة + قدرة • عكسي • ك = د(س) • التجميع أفقي • المحددات: دخل، أسعار بديلة/مكملة، عدد مستهلكين، أذواق، توقعات • سعر يتغير ⇒ حركة • غير سعري ⇒ انتقال.</p></div>
+        <div class="mini"><b class="t" style="color:#b45309">الفصل الثالث</b><p>عرض = استطاعة + رغبة في البيع • طردي • ع = د(ل) • المحددات: تكاليف، عدد منتجين، أسعار عناصر الإنتاج، ضرائب/إعانات، توقعات، أسعار سلع أخرى، تكنولوجيا.</p></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<footer>
+  <div class="wrap">ملخص الاقتصاد الجزئي (1) — الفصول 1 و2 و3 + حل السكاشن • جاهز للطباعة والمذاكرة</div>
+</footer>
+<a class="up" href="javascript:void(0)" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="أعلى الصفحة">↑</a>
+<script>
+/* progress bar + reveal */
+window.addEventListener('scroll',()=>{const h=document.documentElement;const p=(h.scrollTop)/(h.scrollHeight-h.clientHeight)*100;document.getElementById('bar').style.width=p+'%';});
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.06});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+/* ---------- page router ---------- */
+const ORDER=[['home','🏠 الرئيسية'],['ch1','📘 الفصل الأول'],['ch2','📈 الفصل الثاني'],['ch3','📦 الفصل الثالث'],['exercises','✍️ السكاشن بالحل'],['quizSec','🧠 اختبر نفسك']];
+function route(){
+  const id=(location.hash||'#home').replace('#','');
+  let page=document.getElementById(id);
+  if(!page||!page.classList.contains('page')) page=document.getElementById('home');
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  page.classList.add('active');
+  document.querySelectorAll('nav.tabs .tab').forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+page.id));
+  page.querySelectorAll('.reveal').forEach(r=>r.classList.add('in'));
+  window.scrollTo(0,0);
+}
+window.addEventListener('hashchange',route);
+
+/* ---------- pager between pages ---------- */
+ORDER.forEach(([id],i)=>{
+  const p=document.getElementById(id); if(!p) return;
+  const prev=ORDER[i-1], next=ORDER[i+1];
+  const d=document.createElement('div'); d.className='pager';
+  d.innerHTML = (prev?`<a href="#${prev[0]}">→ السابق: ${prev[1]}</a>`:`<a class="ph">—</a>`)
+              + (next?`<a href="#${next[0]}">التالي: ${next[1]} ←</a>`:`<a class="ph">—</a>`);
+  p.appendChild(d);
+});
+
+/* ---------- icons for every card title ---------- */
+const ICONMAP=[
+  ['تعريفات علم الاقتصاد','📚'],['عناصر الإنتاج','🏭'],['أنواع السلع','🛒'],['المصطلحات الأساسية','🔑'],
+  ['المشكلة الاقتصادية','❓'],['منحنى إمكانيات','📐'],['التحليل الاقتصادي الجزئي','🔬'],
+  ['تعريف الطلب','🛍️'],['دالة الطلب','🧮'],['قانون الطلب','📉'],['جدول الطلب','📋'],
+  ['الطلب الفردي','👤'],['العوامل المؤثرة على الطلب','🎛️'],['التغير في الكمية المطلوبة','↔️'],
+  ['تعريف العرض','🏷️'],['دالة العرض','🧮'],['أنواع العرض','🏪'],['جدول العرض','📋'],
+  ['العوامل المحددة للعرض','⚙️'],['التغير في الكمية المعروضة','↔️'],['جدول مقارنة','⚖️']
+];
+document.querySelectorAll('.card h3').forEach(h=>{
+  const t=h.textContent;
+  const f=ICONMAP.find(([k])=>t.includes(k));
+  if(f) h.insertAdjacentHTML('afterbegin','<span class="hico">'+f[1]+'</span>');
+});
+
+route();
+
+/* quiz */
+const QS=[
+ {q:"عنصر الإنتاج الذي يتحمل المخاطر ويحصل على الربح هو:",o:["العمل","رأس المال","التنظيم","الأرض"],a:2,e:"التنظيم هو الذي يمزج العناصر ويأخذ المخاطر، وعائده الربح."},
+ {q:"النقطة الواقعة داخل منحنى إمكانيات الإنتاج تمثل:",o:["إنتاجاً كفؤاً","إنتاجاً غير كفء (موارد غير مستغلة)","إنتاجاً غير ممكن","توازناً بين السلعتين"],a:1,e:"داخل المنحنى = موارد غير مستغلة أو سوء استخدام، ويمكن زيادة الإنتاج دون تضحية."},
+ {q:"الطلب الفعال يعني:",o:["الرغبة فقط","القدرة فقط","الرغبة + القدرة على الشراء","ارتفاع سعر السلعة"],a:2,e:"الطلب = رغبة + قدرة، وإلا فهو مجرد حاجة."},
+ {q:"مع ثبات العوامل الأخرى، انخفاض سعر السلعة يؤدي إلى:",o:["نقص الكمية المطلوبة","زيادة الكمية المطلوبة","ثبات الكمية المطلوبة","انتقال منحنى الطلب"],a:1,e:"علاقة عكسية ⇒ حركة على نفس المنحنى وزيادة الكمية."},
+ {q:"تغيّر أحد العوامل غير السعرية للطلب يؤدي إلى:",o:["حركة على منحنى الطلب","انتقال منحنى الطلب بأكمله","تغيّر سعر التوازن فقط","لا شيء"],a:1,e:"العوامل غير السعرية تغيّر دالة الطلب ⇒ انتقال المنحنى يميناً أو يساراً."},
+ {q:"ارتفع دخل المستهلك فانخفض طلبه على سلعة ما، فهذه السلعة:",o:["عادية","دنيا","بديلة","مكملة"],a:1,e:"السلعة الدنيا علاقتها بالدخل عكسية."},
+ {q:"العلاقة بين سعر السلعة المكملة والطلب على السلعة محل الدراسة غالباً:",o:["طردية","عكسية","ثابتة","غير محددة"],a:1,e:"سعر المكمل ↑ ⇒ الطلب على السلعة ↓."},
+ {q:"منحنى طلب السوق نحصل عليه عن طريق:",o:["التجميع الرأسي للأسعار","التجميع الأفقي للكميات عند كل سعر","ضرب كميات الأفراد","متوسط الأسعار"],a:1,e:"نجمع الكميات المطلوبة من كل مستهلك عند نفس السعر (تجميع أفقي)."},
+ {q:"ارتفاع سعر السلعة مع ثبات العوامل الأخرى (على منحنى العرض) يعني:",o:["انتقال منحنى العرض لليسار","زيادة الكمية المعروضة (تمدّد)","نقص الكمية المعروضة","انتقال منحنى العرض لليمين"],a:1,e:"قانون العرض: علاقة طردية ⇒ حركة لأعلى على نفس المنحنى."},
+ {q:"فرض الضرائب على الإنتاج يؤدي إلى:",o:["زيادة العرض","انخفاض العرض (انتقال لليسار)","ثبات العرض","زيادة الكمية المعروضة"],a:1,e:"الضرائب ترفع التكاليف وتقلل الأرباح ⇒ يقل العرض فينتقل المنحنى لليسار."}
+];
+const qlist=document.getElementById('qlist'), scEl=document.getElementById('sc');
+let score=0, done=0;
+function render(){
+  qlist.innerHTML=''; score=0; done=0; scEl.textContent='0';
+  QS.forEach((item,i)=>{
+    const d=document.createElement('div'); d.className='qitem';
+    let html='<p class="q">'+(i+1)+'. '+item.q+'</p>';
+    item.o.forEach((op,j)=>{ html+='<button class="opt" data-i="'+i+'" data-j="'+j+'">'+op+'</button>'; });
+    html+='<div class="lbx" style="display:none;margin-top:8px;font-size:13.5px;color:#a7f3d0"></div>';
+    d.innerHTML=html; qlist.appendChild(d);
+  });
+  document.querySelectorAll('.opt').forEach(b=>b.addEventListener('click',pick));
+}
+function pick(e){
+  const b=e.currentTarget, i=+b.dataset.i, j=+b.dataset.j, item=QS[i];
+  const parent=b.parentElement;
+  if(parent.dataset.answered) return;
+  parent.dataset.answered='1'; done++;
+  parent.querySelectorAll('.opt').forEach((x,k)=>{ if(k===item.a) x.classList.add('ok'); else if(k===j) x.classList.add('no'); });
+  const lx=parent.querySelector('.lbx'); lx.style.display='block';
+  lx.style.color = (j===item.a) ? '#a7f3d0' : '#fecaca';
+  lx.textContent = (j===item.a ? '✔ صح: ' : '✘ التصحيح: ') + item.e;
+  if(j===item.a){ score++; scEl.textContent=score; }
+}
+document.getElementById('reset').addEventListener('click',render);
+render();
+</script>
+</body>
+</html>
